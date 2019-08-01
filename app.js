@@ -44,6 +44,8 @@ app.get("/api/updateFavorites", (req, res) => {
       console.log(result);
     });
   });
+
+  conn.end();
   res.send("it works");
 })
 
@@ -60,6 +62,8 @@ app.get("/displayKeywords", async function(req, res) {
         });
     });
 
+    conn.end();
+
 }); //displayKeywords
 
 app.get("/api/displayFavorites", function(req, res) {
@@ -74,6 +78,8 @@ app.get("/api/displayFavorites", function(req, res) {
             res.send(results);
         });
     });
+
+    conn.end();
 })
 
 // Start server
