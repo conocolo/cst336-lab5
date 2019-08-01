@@ -32,10 +32,10 @@ app.get("/api/updateFavorites", (req, res) => {
   var sqlParams;
 
   if (req.query.action == "add") {
-    sql = "INSERT INTO img_gallery.favorites (imageURL, keyword) VALUES (?, ?);"
+    sql = "INSERT INTO favorites (imageURL, keyword) VALUES (?, ?);"
     sqlParams = [req.query.imageURL, req.query.keyword];
   } else {
-    sql = "DELETE FROM img_gallery.favorites WHERE imageURL = ?"
+    sql = "DELETE FROM favorites WHERE imageURL = ?"
     sqlParams = [req.query.imageURL];
   }
   conn.connect(function(err) {
@@ -50,7 +50,7 @@ app.get("/api/updateFavorites", (req, res) => {
 app.get("/displayKeywords", async function(req, res) {
     var imageURLs = await tools.getRandomImages("", 1);
     var conn = tools.createConnection();
-    var sql = "SELECT DISTINCT keyword FROM img_gallery.favorites ORDER BY keyword";
+    var sql = "SELECT DISTINCT keyword FROM favorites ORDER BY keyword";
 
     conn.connect(function(err) {
         if (err) throw err;
@@ -64,7 +64,7 @@ app.get("/displayKeywords", async function(req, res) {
 
 app.get("/api/displayFavorites", function(req, res) {
     var conn = tools.createConnection();
-    var sql = "SELECT imageURL FROM img_gallery.favorites WHERE keyword = ?"
+    var sql = "SELECT imageURL FROM favorites WHERE keyword = ?"
     var sqlParams = [req.query.keyword];
 
     conn.connect(function(err) {
