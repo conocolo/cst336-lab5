@@ -59,10 +59,11 @@ app.get("/displayKeywords", async function(req, res) {
         conn.query(sql, function(err, results) {
             if (err) throw err;
             res.render("favorites", {rows: results, imageURLs: imageURLs});
+            conn.end();
         });
     });
 
-    conn.end();
+    
 
 }); //displayKeywords
 
