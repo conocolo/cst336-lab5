@@ -42,10 +42,11 @@ app.get("/api/updateFavorites", (req, res) => {
     if (err) throw err;
     conn.query(sql, sqlParams, function(err, result) {
       console.log(result);
+      conn.end();
     });
   });
 
-  conn.end();
+  
   res.send("it works");
 })
 
@@ -77,10 +78,10 @@ app.get("/api/displayFavorites", function(req, res) {
         conn.query(sql, sqlParams, function(err, results) {
             if (err) throw err;
             res.send(results);
+            conn.end();
         });
     });
 
-    conn.end();
 })
 
 // Start server
